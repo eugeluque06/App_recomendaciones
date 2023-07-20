@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title_win %}<title>Detalle Pelicula: {{ pelicula.nombre }}</title>{% endblock title_win %}
+
+{% block page_content %}
+<div class="content">
+    <div class="container mt-5 mb-5">
+        <div class="pelicula-detalle text-light">
+            
+            <div class="row">
+                <div class="col-3">
+                    <img class="img-fluid rounded-3" src="{{ pelicula.foto.url }}" alt="">
+                </div>
+                <div class="col-9">
+                    <h3 class="pb-2 puntaje-detalle-pelicula">
+                        {{ pelicula.nombre }}
+                        <i class="fa fa-star"></i>
+                        <span class="span-puntaje-1"> {{ pelicula.puntaje }}</span><span class="span-puntaje-2">/5 </span> 
+                        <span class="span-votos">- Votos ({{ pelicula.cant_criticas }}) </span>
+                    </h3>
+
+                    <p>{{ pelicula.resumen }}</p>
+                    <div class="col-12">
+                        <ul>
+                            <li><span>Lanzamiento: </span>{{ pelicula.lanzamiento }}</li>
+                        </ul>
+                    </div>
+
+                  
+
+                    <div class="row">
+                        <h6>Director: </6>
+                        <div class="col-2 listado">
+                            <div class="row">
+                                <div class="position-relative mb-5 text-center">
+                                    <img class="img-listado rounded-3 mb-3" src="{{ pelicula.director.foto.url }}" alt="..." />
+                                    <a id="titulo" class="fw-bolder text-decoration-none link-dark stretched-link" href="{% url 'director-detalle' pk=pelicula.director.id %}">{{ pelicula.director }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-10 p-0">
+                            <div class="row">
+                                <li><span>Actores: </span></li>
+                                {% for a in actores %}
+                                <div class="col-2 listado p-0">
+                                    <div class="position-relative mb-5 text-center">
+                                        <img class="img-listado rounded-3 mb-3" src="{{ a.foto.url }}" alt="..." />
+                                        <a id="titulo" class="fw-bolder text-decoration-none link-dark stretched-link" href="{% url 'actor-detalle' pk=a.id %}">{{ a.nombre }}</a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row pb-6">
+                <div class="col-5">
+                    {% include 'criticas.html' %}
+                </div>
+                <div class="col-6 criticas-form">
+                    {% include 'criticas_form.html' %}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock page_content %}

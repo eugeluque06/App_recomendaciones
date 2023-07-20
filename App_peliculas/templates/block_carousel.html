@@ -1,0 +1,103 @@
+<!-- Carousel -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" ></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" ></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></li>
+    </ol>
+    <!-- -->
+    <div class="carousel-inner">
+
+        {% for p in peli_carousel_4 %}
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row px-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid rounded-3" src="{{ p.foto.url }}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left align-self-center">
+                            <h1 class="h1">{{ p.nombre }}</h1>
+                            <h3 class="h2">({{ p.lanzamiento }})</h3>
+                            <p>{{ p.director }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% for p in peli_carousel_3 %}
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row px-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{{ p.foto.url }}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1">{{ p.nombre }}</h1>
+                            <h3 class="h2">({{ p.lanzamiento }})</h3>
+                            <p>{{ p.director }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% for p in peli_carousel_2 %}
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row px-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{{ p.foto.url }}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1">{{ p.nombre }}</h1>
+                            <h3 class="h2">({{ p.lanzamiento }})</h3>
+                            <p>{{ p.director }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% for p in peli_carousel_1 %}
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row px-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{{ p.foto.url }}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1">{{ p.nombre }}</h1>
+                            <h3 class="h2">({{ p.lanzamiento }})</h3>
+                            <p>{{ p.director }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div> 
+
+    <!-- button previous -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <!-- button next -->
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+</div>
+<!-- End Carousel-->

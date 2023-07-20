@@ -1,0 +1,8 @@
+.select2-container--default .select2-selection--multiple {
+    width: 350px;
+}
+
+.form-control {
+    border: 1 solid #093e74;
+    border-radius: 0;
+}

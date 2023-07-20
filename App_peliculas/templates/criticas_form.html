@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+
+<div class="form-criticas bg-dark p-3 rounded-3">
+    <h5 class="text-center">Su Reseña</h5>
+    <form method="post">{% csrf_token %}
+        <div class="row pb-2">
+            <div class="col-6">
+                <h6> ingrese el correo </h6>
+                {{ form.email_usuario }}
+            </div>
+            <div class="col-6">
+                <h6> ingrese el nombre de usuario</h6>
+                {{ form.nombre_usuario}}
+            </div>
+        </div>
+        <div class="row pb-2">
+            <div class="col-12">
+                <h6> ingrese el puntaje </h6>
+                {{ form.puntaje}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h6> ingrese la reseña </h6>
+                {{ form.resenia}}
+            </div>
+        </div>
+        <div class="row p-3">
+            <button type="submit" class="btn btn-danger">Publicar</button>
+        </div>
+    </form>
+</div>
