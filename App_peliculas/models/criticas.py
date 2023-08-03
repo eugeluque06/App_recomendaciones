@@ -44,6 +44,19 @@ class Critica(models.Model):
        ordering = ['-id']
 
 
+def aprobar_critica(modeladmin, request, queryset):
+    queryset.update(estado_resenia ='A')
+
+aprobar_critica.short_description = 'Aprobada'
+
+def rechazar_critica(modeladmin, request, queryset):
+    queryset.update(estado_resenia ='R')
+
+  
+rechazar_critica.short_description = 'Rechazar'
+
+
+
 @admin.register(Critica)
 class CriticaAdmin(admin.ModelAdmin):
     list_display = ('estado_resenia', 'resenia', 'email_usuario', 'nombre_usuario', 'pelicula', 'puntaje')
@@ -52,10 +65,12 @@ class CriticaAdmin(admin.ModelAdmin):
     list_per_page = 10
     ordering = ('-id', ) # así muestro las últimas críticas
     search_fields = ('email_usuario', 'nombre_usuario', 'estado_resenia',)
-    actions = None
+    actions = [aprobar_critica,rechazar_critica]
     fields = ['estado_resenia'] # solo la reseña
 
     def has_add_permission(self, request):
         return False # eliminamos el boton de agregar críticas
     def has_delete_permission(self, request, obj=None):
         return False # y el de elminarlas
+    
+   
