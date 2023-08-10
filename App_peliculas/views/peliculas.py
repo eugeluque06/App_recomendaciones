@@ -14,16 +14,16 @@ from django.db.models import Q
 
 
 
-class PeliculasTV(ListView): # Catálogo de Peliculas
+class PeliculasTV(ListView): 
     template_name = 'peliculas.html'
     paginate_by = 10
     object_list = Pelicula.objects.order_by('-puntaje')
 
-    def get(self, request, *args, **kwargs): # BUSCADOR
+    def get(self, request, *args, **kwargs): 
         context = self.get_context_data(**kwargs)
-        queryset = request.GET.get('query') # <input type="text" name="query" class="form-control" placeholder="Buscar">
+        queryset = request.GET.get('query') 
         if queryset:
-            q = Pelicula.objects.filter( # filter: puede traer más de un resultado
+            q = Pelicula.objects.filter(
                 Q(nombre__icontains = queryset) |
                 Q(lanzamiento__icontains = queryset) |
                 Q(director__nombre__icontains = queryset) |
@@ -36,9 +36,9 @@ class PeliculasTV(ListView): # Catálogo de Peliculas
            return self.render_to_response(context)
 
 
-class PeliculaDetalleTV(TemplateView): # Detalle de una Película
+class PeliculaDetalleTV(TemplateView):
     template_name = 'pelicula_detalle.html'
-    form_class = CriticaMF # Para Críticas: ModelForm de críticas, incluido en pelicula_detalle.html
+    form_class = CriticaMF 
 
     def get_context_data(self, **kwargs):
         pk_pelicula = self.kwargs['pk']
@@ -63,7 +63,7 @@ class PeliculaDetalleTV(TemplateView): # Detalle de una Película
             c_new.puntaje = puntaje
             c_new.resenia = resenia
             if (str(resenia) == ""):
-                c_new.estado_resenia = "R" # si la reseña está en blanco la rechazó automáticamente (el puntaje sí es válido igualmente)
+                c_new.estado_resenia = "R" 
             c_new.pelicula = Pelicula.objects.get(pk = pk_pelicula)
             c_new.save()
             context = self.get_context_data(**kwargs)
@@ -72,11 +72,11 @@ class PeliculaDetalleTV(TemplateView): # Detalle de una Película
             context = self.get_context_data(**kwargs)
             return self.render_to_response(context)
             
-    def get(self, request, *args, **kwargs): # BUSCADOR
+    def get(self, request, *args, **kwargs): 
         context = self.get_context_data(**kwargs)
-        queryset = request.GET.get('query') # <input type="text" name="query" class="form-control" placeholder="Buscar">
+        queryset = request.GET.get('query') 
         if queryset:
-            q = Pelicula.objects.filter( # filter: puede traer más de un resultado
+            q = Pelicula.objects.filter( 
                 Q(nombre__icontains = queryset) |
                 Q(lanzamiento__icontains = queryset) |
                 Q(director__nombre__icontains = queryset) |

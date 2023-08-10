@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView
 from App_peliculas.models.peliculas import Actor
 from App_peliculas.models.peliculas import Pelicula
 
-from django.db.models import Q # Nos ayuda con las consultas
+from django.db.models import Q 
 from django.shortcuts import render
 
 
@@ -17,12 +17,12 @@ class ActoresTV(ListView):
         context=super().get_context_data(**kwargs)
         context['actores'] = Actor.objects.all()
         return context
-
-    def get(self, request, *args, **kwargs): # BUSCADOR
+    
+    def get(self, request, *args, **kwargs): 
         context = self.get_context_data(**kwargs)
-        queryset = request.GET.get('query') # <input type="text" name="query" class="form-control" placeholder="Buscar">
+        queryset = request.GET.get('query')
         if queryset:
-            q = Actor.objects.filter( # filter: puede traer más de un resultado
+            q = Actor.objects.filter(
                Q(nombre__icontains = queryset) |
                 Q(nacimiento__icontains = queryset) |
                 Q(nacionalidad__icontains = queryset) 
@@ -44,11 +44,11 @@ class ActorDetalleTV(TemplateView):
         context['peliculas'] = Pelicula.objects.filter(actores = pk_actor)
         return context
 
-    def get(self, request, *args, **kwargs): # BUSCADOR
+    def get(self, request, *args, **kwargs): 
         context = self.get_context_data(**kwargs)
-        queryset = request.GET.get('query') # <input type="text" name="query" class="form-control" placeholder="Buscar">
+        queryset = request.GET.get('query')
         if queryset:
-            q = Actor.objects.filter( # filter: puede traer más de un resultado
+            q = Actor.objects.filter( 
                Q(nombre__icontains = queryset) |
                 Q(nacimiento__icontains = queryset) |
                 Q(nacionalidad__icontains = queryset) 

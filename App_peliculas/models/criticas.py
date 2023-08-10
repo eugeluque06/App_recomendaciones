@@ -63,14 +63,12 @@ class CriticaAdmin(admin.ModelAdmin):
     list_display_links = ('estado_resenia', )
     list_filter = ('estado_resenia', )
     list_per_page = 10
-    ordering = ('-id', ) # así muestro las últimas críticas
+    ordering = ('-id', ) 
     search_fields = ('email_usuario', 'nombre_usuario', 'estado_resenia',)
     actions = [aprobar_critica,rechazar_critica]
-    fields = ['estado_resenia'] # solo la reseña
-
+    fields = ['estado_resenia'] 
     def has_add_permission(self, request):
-        return False # eliminamos el boton de agregar críticas
+        return False 
     def has_delete_permission(self, request, obj=None):
-        return False # y el de elminarlas
-    
+        return False 
    

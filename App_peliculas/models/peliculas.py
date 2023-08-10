@@ -10,7 +10,7 @@ from django.db.models import Q
 
 class PeliculaManager(models.Manager):
     def get_ranking(self):
-        return self.order_by('-puntaje')[:12]
+        return self.order_by('-puntaje')[:10]
 
 
 class Pelicula(models.Model):
@@ -22,7 +22,7 @@ class Pelicula(models.Model):
     actores = models.ManyToManyField(Actor, related_name = 'pelicula')
     director = models.ForeignKey(Director, related_name = 'pelicula', on_delete=models.RESTRICT)
     puntaje = models.IntegerField(default = 1, validators = [MinValueValidator(1), MaxValueValidator(5)]) # para que el get_puntaje tenga efecto hay que cargar a mano una crítica x pelicula con un puntaje X
-    cant_criticas = models.IntegerField(default = 0) # añadido
+    cant_criticas = models.IntegerField(default = 0)
 
     class Meta:
         verbose_name = ("Pelicula")
@@ -52,7 +52,7 @@ class Pelicula(models.Model):
             sumatoria+=c.puntaje
         media=0 if(sumatoria==0) else (sumatoria/cant_puntajes)
         self.puntaje=media
-        self.cant_criticas=cant_puntajes # añadido
+        self.cant_criticas=cant_puntajes
         self.save()
 
 
