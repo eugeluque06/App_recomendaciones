@@ -29,6 +29,7 @@ class DirectoresTV(ListView):
            return self.render_to_response(context)
 
 
+
 class DirectorDetalleTV(TemplateView):
     template_name='director_detalle.html'
     

@@ -55,6 +55,11 @@ class Pelicula(models.Model):
         self.cant_criticas=cant_puntajes
         self.save()
 
+def eliminar_pelicula(modelAdmin,queryset,request): 
+    for pelicula in queryset: 
+        pelicula.delete()
+
+eliminar_pelicula.short_description = 'eliminar'
 
 @admin.register(Pelicula)
 class PeliculaAdmin(admin.ModelAdmin):
@@ -65,7 +70,7 @@ class PeliculaAdmin(admin.ModelAdmin):
     ordering = ('nombre', 'lanzamiento', 'puntaje')
     search_fields = ('nombre', 'director__nombre', 'actores__nombre')
     fields = ['nombre', 'foto', 'resumen', 'lanzamiento', 'actores', 'director']
-    actions = None
+    actions = [eliminar_pelicula]
 
     @admin.display(description='actores', ordering='nombre') # nombre en columna, tabla (sino se ve el "get_actores")
     def get_actores(self, obj):
@@ -75,5 +80,6 @@ class PeliculaAdmin(admin.ModelAdmin):
 
     from django.contrib.auth.models import Group
     admin.site.unregister(Group) # saco del panel app Grupos, me interesa que se vea solo la de usuarios
+
 
 

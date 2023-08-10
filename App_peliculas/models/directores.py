@@ -20,7 +20,12 @@ class Director(models.Model):
     def get_descripcion_completa(self):
         return self.nombre+"; "+self.nacionalidad+"; "+str(self.nacimiento)+"; "+self.biografia
 
-#
+
+def eliminar_director(modelAdmin,queryset,request): 
+    for director in queryset: 
+        director.delete()
+
+eliminar_director.short_description = 'eliminar'
 
 @admin.register(Director)
 class DirectorAdmin(admin.ModelAdmin):
@@ -30,4 +35,4 @@ class DirectorAdmin(admin.ModelAdmin):
     list_per_page = 10 
     ordering = ('nombre', ) 
     search_fields = ('nombre', 'nacionalidad', 'nacimiento') 
-    actions = None 
+    actions = [eliminar_director]

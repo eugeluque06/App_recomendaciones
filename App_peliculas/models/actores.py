@@ -18,6 +18,12 @@ class Actor(models.Model):
     def get_descripcion_completa(self):
         return self.nombre+"; "+self.nacionalidad+"; "+str(self.nacimiento)+"; "+self.biografia
 
+def eliminar_actor(modelAdmin,queryset,request): 
+    for actor in queryset: 
+        actor.delete()
+
+
+eliminar_actor.short_description = 'eliminar'
 
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
@@ -27,4 +33,4 @@ class ActorAdmin(admin.ModelAdmin):
     list_per_page = 10
     ordering = ('nombre', )
     search_fields = ('nombre', 'nacionalidad', 'nacimiento')
-    actions = None
+    actions = [eliminar_actor]
